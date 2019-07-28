@@ -1,7 +1,6 @@
 package lstrings
 
 import (
-	"bytes"
 	"golang.org/x/text/runes"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
@@ -16,23 +15,24 @@ type optionAccent struct {
 }
 
 func RemoveAccent(s string) string {
-	destinationCharacters, _ := stringToRune(`AAAAEEEIIOOOOUUYaaaaeeeiioooouuyAaDdIiUuOoUuAaAaAaAaAaAaAaAaAaAaAaAaEeEeEeEeEeEeEeEeIiIiOoOoOoOoOoOoOoOoOoOoOoOoUuUuUuUuUuUuUuYyy`)
-	sourceCharacters, lengthSource := stringToRune(`ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾếỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỸỹỳ`)
+	return removeAccent(s)
 
-	option := optionAccent{
-		destinationCharacters: destinationCharacters,
-		sourceCharacters:      sourceCharacters,
-		lengthSource:          lengthSource,
-	}
+	// destinationCharacters, _ := stringToRune(`AAAAEEEIIOOOOUUYaaaaeeeiioooouuyAaDdIiUuOoUuAaAaAaAaAaAaAaAaAaAaAaAaEeEeEeEeEeEeEeEeIiIiOoOoOoOoOoOoOoOoOoOoOoOoUuUuUuUuUuUuUuYyy`)
+	// sourceCharacters, lengthSource := stringToRune(`ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠạẢảẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặẸẹẺẻẼẽẾếỀềỂểỄễỆệỈỉỊịỌọỎỏỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợỤụỦủỨứỪừỬửỮữỰựỸỹỳ`)
+	//
+	// option := optionAccent{
+	// 	destinationCharacters: destinationCharacters,
+	// 	sourceCharacters:      sourceCharacters,
+	// 	lengthSource:          lengthSource,
+	// }
+	//
+	// var buffer bytes.Buffer
+	//
+	// for _, runeValue := range s {
+	// 	buffer.WriteString(removeAccentChar(string(runeValue), option))
+	//
+	// }
 
-	var buffer bytes.Buffer
-
-	for _, runeValue := range s {
-		buffer.WriteString(removeAccentChar(string(runeValue), option))
-
-	}
-
-	return removeAccent(buffer.String())
 }
 
 func removeAccent(s string) string {
